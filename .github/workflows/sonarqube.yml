@@ -33,6 +33,7 @@ jobs:
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        SONAR_TARGET_BRANCH: ${{ secrets.SONAR_TARGET_BRANCH }}
       run: |
         sonar-scanner \
           -Dsonar.projectKey=refbrancherror \
@@ -42,4 +43,4 @@ jobs:
           -Dsonar.host.url=$SONAR_HOST_URL \
           -Dsonar.token=$SONAR_TOKEN \
           -Dsonar.branch.name=${{ github.ref_name }} \
-          -Dsonar.branch.target=main
+          -Dsonar.branch.target=$SONAR_TARGET_BRANCH
