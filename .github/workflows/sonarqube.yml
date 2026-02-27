@@ -1,0 +1,49 @@
+name: SonarQube Analysis
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  sonarqube:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        ref: master
+        fetch-depth: 0
+    
+    - name: Setup Java
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+    
+    - name: Setup SonarQube Scanner
+      uses: warchant/setup-sonar-scanner@v7
+    
+    - name: Run SonarQube Scanner
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        SONAR_TARGET_BRANCH: ${{ secrets.SONAR_TARGET_BRANCH }}
+        SONAR_DISABLE_AUTOCONFIG: ${{ secrets.SONAR_DISABLE_AUTOCONFIG }}
+      run: |
+        sonar-scanner \
+          -Dsonar.projectKey=refbrancherror \
+          -Dsonar.projectName=refbrancherror \
+          -Dsonar.projectVersion=1.0 \
+          -Dsonar.sources=. \
+          -Dsonar.host.url=$SONAR_HOST_URL \
+          -Dsonar.token=$SONAR_TOKEN \
+          -Dsonar.branch.name=${{ github.ref_name }} \
+          -Dsonar.branch.target=$SONAR_TARGET_BRANCH \
+          -Dsonar.branch.autoconfig.disabled=$SONAR_DISABLE_AUTOCONFIG
