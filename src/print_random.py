@@ -3,10 +3,10 @@ def hello_world():
     print("Hello, World!")
 
 def random_function(param1, param2):
-    print(f"Parameter 1: {param1}")
-    print(f"Parameter 2: {param2}")
-    int c=param1<>param2    # checking if the parameters are not equal and assigning the result to variable c    
-    return param1<>param2 #checking if the parameters are not equal
+    print(f"Random function called with parameters: {param1} and {param2}")
+    if param2 > 40:
+        break
+    return param1.upper()
 
 
 def main():
