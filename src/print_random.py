@@ -5,8 +5,7 @@ def hello_world():
 def random_function(param1, param2):
     print(f"Parameter 1: {param1}")
     print(f"Parameter 2: {param2}")
-    int c=param1<>param2    # checking if the parameters are not equal and assigning the result to variable c
-    int d=param1<>param2    # checking if the parameters are not equal and assigning the result to variable c
+    int c=param1<>param2    # checking if the parameters are not equal and assigning the result to variable c    
     return param1<>param2 #checking if the parameters are not equal
 
 
